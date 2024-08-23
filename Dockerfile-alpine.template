@@ -250,3 +250,7 @@ STOPSIGNAL SIGINT
 
 EXPOSE 5432
 CMD ["postgres"]
+
+# Explicitly specify the host to force `pg_isready` to connect to the
+# TCP socket instead of the Unix domain socket.
+HEALTHCHECK --start-period=1s CMD pg_isready --host=127.0.0.1 || exit 1
